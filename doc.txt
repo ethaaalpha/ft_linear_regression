@@ -1,0 +1,7 @@
+
+
+expression linéraire:
+
+prix de la voiture = b + (a * age)
+
+l'objectif est donc de déterminer b et a à l'aide d'une régression linéraire
