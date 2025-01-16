@@ -5,3 +5,14 @@ expression linéraire:
 prix de la voiture = b + (a * age)
 
 l'objectif est donc de déterminer b et a à l'aide d'une régression linéraire
+
+une fonction affine c'est ax+b
+la on a theta0 + theta1*mileage
+a = theta1
+b = theta0
+
+theta1 c'est donc la pente de la fonction affine
+theta0 c'est l'ordonnée à l'origine de la fonction
+
+
+https://dev.to/amananandrai/a-deep-dive-into-linear-regression-3-way-implementation-3jb#:~:text=Here%20theta%2D0%20and%20theta,slope%20of%20the%20regression%20line.

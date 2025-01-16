@@ -1,6 +1,16 @@
 import matplotlib.pyplot as pp
 import csv, os, sys
 
+class Brain:
+    def __init__(self, data: list[tuple[int, int]]):
+        self._data = data
+    
+    def _calculate_theta0():
+        return 0
+    
+    def _calculate_theta1():
+        return 0
+
 def load(filepath: str) -> list[tuple[int, int]]:
     result: list[tuple[int, int]] = list()
 
