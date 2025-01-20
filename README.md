@@ -3,10 +3,13 @@ This project is from 42 school.
 This is the introduction to machine learning with the concept of [linear regression](https://en.wikipedia.org/wiki/Linear_regression) using the [gradient descent](https://en.wikipedia.org/wiki/Gradient_descent) algorithm.  
 
 The objective of this is to create a program that will be able to predict the price of a car based on its age (in km).  
-The program will be trained using a dataset.  
+The program will be trained using a provided dataset.  
+
+> [!INFO]
+> Every mathematical notion is written using [LaTeX](https://fr.wikipedia.org/wiki/LaTeX)
 
 ## Theorical
-To create this program we need to create a fonction that based on the dataset will have the best average of the price based on the car age.  
+To create this program we need to create a fonction that based on the dataset will calculate the best average price based on the car age.  
 
 <table>
     <tr>
@@ -27,14 +30,14 @@ In other words a linear function equals $a*x+b$.
 Where **a is the slope of the function** and **b is the intercept**.  
 
 ### Cost function
-To find the bets values of our linear fonction, we are going to make predictions and compare it to the actual value (dataset).  
+To find the best values of our linear fonction, we are going to make predictions and compare it to the actual value (dataset).  
 We will calculate the distance between the two points:  
 This is the euclidian distance formula $\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$, since we will only use the Y axis we do not care about X, it can be simplified to $\sqrt{(y_2-y_1)^2}$.  
 
 We also do not need to keep the **sqrt** to reduce cost of calculation.
 It will be the square error defined by $(y_2-y_1)^2$
 
-Now we have the row formula but we might replace those values by the real ones:  $(f(x_i) - y_i)^2$
+Now we have the row formula but we might replace those values by the real ones:  $(f(x_i) - y_i)^2$  
 Where $f(x_i)$ represent the "predicted value" and $y_i$ the real one.  
 
 This is the error for $i$, but now we need to to calculate the sum of all the erros made by the program for all the dataset (for each points).  
@@ -48,9 +51,10 @@ Congratulation you have you have discovered the mean square error formula.
 If we replace our mean square error formula using our linear fonction, it will look like this: $\frac{1}{2m}\sum_{i=0}^m (a*x_i+b - y_i)^2$
 
 This is a convex function. 
-METTRE LA REPRESNETATION ICI
+<img src="doc/convexe.png" width=500>
 
-We want to minimize our cost to have the best result for our prediction program. There are multiples ways to minimize a cost function. In this project it is specified to use the gradient descent algorithm.
+We want to minimize our cost to have the best result for our prediction program, so we need to find a minimum. There are multiples ways to minimize a cost function  
+In this project it is specified to use the **gradient descent algorithm**.
 
 #### Derivative function
 Just a little remember about what is a it.  
@@ -59,3 +63,15 @@ A derivate function is written with $f'(x)$ or $\frac{df}{dx}$.
 
 #### Iterative process
 
+## Pratical
+
+### How to use it
+
+### Matplotlib
+
+## Resources
+
+- [Machine Learnia](https://www.youtube.com/watch?v=EUD07IiviJg&list=PLO_fdPEVlfKqUF5BPKjGSh7aV9aBshrpY)
+- [Derivative Function - FR](https://www.youtube.com/watch?v=9Mann4wOGJA&list=PLVUDmbpupCaoY7qihLa2dHc9-rBgVrgWJ)
+- [Derivative Composated Functions - FR](https://www.youtube.com/watch?v=lwcFgnbs0Ew)
+- [Suites - FR](https://www.youtube.com/watch?v=8I6dotcdW3I)
