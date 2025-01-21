@@ -3,7 +3,8 @@ import csv, os, sys
 
 data_file = "train.csv"
 
-def runner()
+def runner():
+    retu
 
 def main():
     args = sys.argv

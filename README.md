@@ -48,7 +48,7 @@ The $\frac{1}{2m}$ is used to have average of the errors, the 2 is here to help 
 Congratulation you have you have discovered the mean square error formula.  
 
 ### Gradient descent
-If we replace our mean square error formula using our linear fonction, it will look like this: $\frac{1}{2m}\sum_{i=0}^m (a*x_i+b - y_i)^2$
+If we replace our mean square error formula using our linear fonction, it will look like this: $J(a,b)=\frac{1}{2m}\sum_{i=0}^m (a*x_i+b - y_i)^2$
 
 This is a convex function. 
 <img src="doc/convexe.png" width=500>
@@ -62,6 +62,8 @@ A **derivative function** is a tool that we can use in math to mesure how fast a
 A derivate function is written with $f'(x)$ or $\frac{df}{dx}$.  
 
 #### Iterative process
+$a_{i+1}=a_i-\alpha*\frac{1}{m}\sum_{i=0}^m (a*x_i+b - y_i)$
+
 
 ## Pratical
 
@@ -75,3 +77,4 @@ A derivate function is written with $f'(x)$ or $\frac{df}{dx}$.
 - [Derivative Function - FR](https://www.youtube.com/watch?v=9Mann4wOGJA&list=PLVUDmbpupCaoY7qihLa2dHc9-rBgVrgWJ)
 - [Derivative Composated Functions - FR](https://www.youtube.com/watch?v=lwcFgnbs0Ew)
 - [Suites - FR](https://www.youtube.com/watch?v=8I6dotcdW3I)
+- [Derivative Function Easy - FR](https://www.youtube.com/watch?v=RLEE-iSBimc)
