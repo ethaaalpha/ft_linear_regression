@@ -62,7 +62,11 @@ A **derivative function** is a tool that we can use in math to mesure how fast a
 A derivate function is written with $f'(x)$ or $\frac{df}{dx}$.  
 
 #### Iterative process
-$a_{i+1}=a_i-\alpha*\frac{1}{m}\sum_{i=0}^m (a*x_i+b - y_i)$
+$a_{i+1}=a_i-\alpha*\frac{1}{m}\sum_{i=0}^m x*(a*x_i+b - y_i)$
+
+$b_{i+1}=b_i-\alpha*\frac{1}{m}\sum_{i=0}^m (a*x_i+b - y_i)$
+
+### Normalization
 
 
 ## Pratical

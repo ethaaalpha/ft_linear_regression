@@ -1,55 +1,80 @@
 import matplotlib.pyplot as pp
-import csv, os, sys, time
+import csv, os, sys
 
-class ToolBox:
-    def mean_square(self, x, y) -> float:
-        return (x-y)**2
+class Normalizer:
+    def normalize(self, data: list[tuple[int, int]]) -> list[tuple[int, int]]:
+        min_x, max_x = min([x for x,_ in data]), max([x for x,_ in data])
+        min_y, max_y = min([y for _,y in data]), max([y for _,y in data])
+        all_x_normalized = [(x - min_x) / (max_x - min_x) for x, _ in data]
+        all_y_normalized = [(y - min_y) / (max_y- min_y) for _, y in data]
 
+        return list(zip(all_x_normalized, all_y_normalized))
 
-class Brain:
+    def denormalize(self, original_data: list[tuple[int, int]], normalized_data: list[tuple[int, int]]) -> list[tuple[int, int]]:
+        min_x, max_x = min([x for x,_ in original_data]), max([x for x,_ in original_data])
+        min_y, max_y = min([y for _,y in original_data]), max([y for _,y in original_data])
+        all_x_reverted = [x * (max_x - min_x) + min_x for x,_ in normalized_data]
+        all_y_reverted = [y * (max_y - min_y) + min_y for _,y in normalized_data]
+        
+        return list(zip(all_x_reverted, all_y_reverted))
+
+class Computer:
     learningRate = 0.01
+    stop = 1e-12
 
     def __init__(self, data: list[tuple[int, int]]):
         self._data = data
 
     def compute(self) -> tuple[float, float]:
         """Return theta0 and theta1"""
-        theta0: float = 0 # also b
-        theta1: float = 0 # also a
+        theta0: float = 0.0
+        theta1: float = 0.0
+        old_theta0: float = 1.0
+        old_theta1: float = 1.0
         m: int = len(self._data)
+        counter: int = 0
 
-        for i in range(38):
-            print(f"t0 {theta0} t1 {theta1}")
-            theta0 = self.__calculate_theta0(theta1, theta0, m)
-            theta1 = self.__calculate_theta1(theta1, theta0, m)
-
+        while abs(old_theta1 - theta1) > self.stop and abs(old_theta0 - theta0) > self.stop:
+            old_theta0, old_theta1 = theta0, theta1
+            theta0 = self.__calculate_theta0(theta0, theta1, m)
+            theta1 = self.__calculate_theta1(theta0, theta1, m)
+            counter+=1
+        print(f"gradient descent iterate : {counter} times")
         return theta0, theta1
 
-    def __calculate_theta0(self, a: float, b: float, m: int):
-        gradient = 0
+    def __calculate_theta0(self, theta0: float, theta1: float, m: int):
+        gradient = (1/m) * sum((theta1*x+theta0-y) for x, y in self._data)
+        return theta0 - self.learningRate * gradient
 
-        for values in self._data:
-            x = values[0]
-            y = values[1]
-            gradient += (a*x+b-y)
-        gradient /= m
+    def __calculate_theta1(self, theta0: float, theta1: float, m: int):
+        gradient = (1/m) * sum(x * (theta1*x+theta0-y) for x, y in self._data)
+        return theta1 - self.learningRate * gradient
 
-        print(round(b - self.learningRate * gradient, 5))
-        return round(b - self.learningRate * gradient, 5)
+def runner(filepath: str):
+    data = load(filepath)
 
-    def __calculate_theta1(self, a: float, b: float, m: int):
-        gradient = 0
+    if (len(data) == 0):
+        print("The csv is empty!")
+        return
 
-        for values in self._data:
-            x = values[0]
-            y = values[1]
-            gradient += x*(a*x+b-y)
-            # print(f"grad: {gradient}")
-        gradient /= m
-        # print(f"grad_div: {gradient}")
+    tool = Normalizer()
+    normalized_data = tool.normalize(data)
+    brain = Computer(normalized_data)
+    res = brain.compute()
+    print(f"thetas : {res}")
 
-        return round(a - self.learningRate * gradient, 5)
+    x_values = [p[0] for p in data]
+    y_values = [p[1] for p in data]
+    pp.plot(x_values, y_values, 'o')
 
+    x_values_norm = [p[0] for p in normalized_data]
+    y_values_pred = [res[1] * x + res[0] for x in x_values_norm]
+    denormalized = tool.denormalize(data, list(zip(x_values_norm, y_values_pred)))
+
+    x_values_denor = [p[0] for p in denormalized]
+    y_values_denor = [p[1] for p in denormalized]
+    pp.plot(x_values_denor, y_values_denor, color='green')
+    pp.show()
 
 def load(filepath: str) -> list[tuple[int, int]]:
     """Load the CSV file where tuple[0] = x and tuple[1] = y"""
@@ -61,27 +86,9 @@ def load(filepath: str) -> list[tuple[int, int]]:
         if (len(data) > 1):
             for row in data[1:]:
                 if (len(row) == 2 and row[0].isdigit() and row[1].isdigit()):
-                    # print(f"{int(row[0])} | {int(row[1])}")
                     result.append((int(row[0]), int(row[1])))
+
     return result
-
-def runner(filepath: str):
-    data = load(filepath)
-    brain = Brain(data)
-
-    if (len(data) == 0):
-        print("The csv is empty!")
-        return
-
-    res = brain.compute()
-    # print(res)
-    x_values = [point[0] for point in data]
-    y_values = [point[1] for point in data]
-    y_values_pred = [res[0] + res[1] * x for x in x_values]
-
-    # pp.scatter(x_values, y_values)
-    # pp.plot(x_values, y_values_pred)
-    # pp.show()
 
 def main():
     args = sys.argv
