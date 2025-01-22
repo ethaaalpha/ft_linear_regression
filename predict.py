@@ -7,9 +7,9 @@ data_file = "train.csv"
 def linear_function(a: float, x: float, b: float):
     return a * x + b
 
-def runner(value: int, thetas: tuple[float, float], y_min_max: tuple[float, float]):
+def runner(value: int, thetas: tuple[float, float], x_min_max, y_min_max: tuple[float, float]):
     tool = Analyzer()
-    normalized_value = tool.normalize(y_min_max[0], y_min_max[1], value)
+    normalized_value = tool.normalize(x_min_max[0], x_min_max[1], value)
     normalized_result = linear_function(thetas[1], normalized_value, thetas[0])
     denormalized_result = tool.denormalize(y_min_max[0], y_min_max[1], normalized_result)
 
@@ -25,14 +25,15 @@ def parser(value: str):
         return
 
     values = csv.load("train.csv")
-    if (len(values) != 2 or len(values[0]) != 2 or len(values[1]) != 2):
+    if (len(values) != 3 or len(values[0]) != 2 or len(values[1]) != 2):
         print("Invalid train.csv, please run training first!")
         return
     
     thetas = values[0]
-    y_min_max = values[1]
+    x_min_max = values[1]
+    y_min_max = values[2]
 
-    runner(int(value), thetas, y_min_max)
+    runner(int(value), thetas, x_min_max, y_min_max)
 
 def main():
     args = sys.argv

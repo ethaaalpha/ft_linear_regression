@@ -36,6 +36,7 @@ class Computer:
 def runner(filepath: str) -> list[tuple[float, float]]:
     csv = CSVManager()
     data = csv.load(filepath)
+    x_values = [p[0] for p in data]
     y_values = [p[1] for p in data]
 
     if (len(data) == 0):
@@ -46,9 +47,10 @@ def runner(filepath: str) -> list[tuple[float, float]]:
     brain = Computer(tool.normalize_list(data))
 
     thetas = brain.compute()
+    min_x, max_x = min(x_values), max(x_values)
     min_y, max_y = min(y_values), max(y_values)
 
-    csv.export("train.csv", thetas, (min_y, max_y))
+    csv.export("train.csv", thetas, (min_x, max_x), (min_y, max_y))
 
     # x_values_norm = [p[0] for p in normalized_data]
     # y_values_pred = [computation[1] * x + computation[0] for x in x_values_norm]
