@@ -41,6 +41,7 @@ def display(initial_data: list[tuple[float, float]], result: list[tuple[float,fl
     y_values = [p[1] for p in initial_data]
     y_predictions = [p[1] for p in denormalized_result]
 
+    pl.figure("ft_linear_regression")
     pl.plot(x_values, y_values, 'o')
     pl.plot(x_values, y_predictions, color='green')
     pl.title(f"algorithm accuracy: {tool.accuracy(y_values, y_predictions):.2f}%")

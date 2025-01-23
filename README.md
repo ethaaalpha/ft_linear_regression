@@ -6,7 +6,7 @@ The objective of this is to create a program that will be able to predict the pr
 The program will be trained using a provided dataset.  
 
 > [!INFO]
-> Every mathematical notion is written using [LaTeX](https://fr.wikipedia.org/wiki/LaTeX)
+> Every mathematical notion is written using [LaTeX](https://fr.wikipedia.org/wiki/LaTeX)(sound=lateC, to avoid bad jokes)
 
 ## Theorical
 To create this program we need to create a fonction that based on the dataset will calculate the best average price based on the car age.  
@@ -62,18 +62,44 @@ A **derivative function** is a tool that we can use in math to mesure how fast a
 A derivate function is written with $f'(x)$ or $\frac{df}{dx}$.  
 
 #### Iterative process
+
+Now that we know what is a derivative and we have our cost fonction. We are able to make our **gradient descent**.  
+A **gradient** is the result of a derivative in a precise point.  
+We want to minimise a and b to have the best result in our cost function.
+This is why we use a **partial derivative** to derivate the cost function depending on a or b.  
+
+> [!INFO]
+> A partial derivative with multiple variables and we decided to select one and make all others constants (mean they will equals k=0)
+
+This is the iterative algorithm for a and b.  
+
 $a_{i+1}=a_i-\alpha*\frac{1}{m}\sum_{i=0}^m x*(a*x_i+b - y_i)$
 
 $b_{i+1}=b_i-\alpha*\frac{1}{m}\sum_{i=0}^m (a*x_i+b - y_i)$
 
+$\alpha$ here is the learning rate which mean how fast we are gonna go down to the "minimum", if it is too high we might miss our minimum, if it is too low we might never reach our minimum !
+
+> [!NOTICE]
+> You could notice how our values are always going down even if the gradient is positive or negative. It it because of the $-$ that cause $-(-grad)=+grad$ and $-(+grad)=-grad$.  
+> If the gradient is positive we are on the right side of slope else we are on the left side 
+
 ### Normalization
 
+We normaliza
 
 ## Pratical
 
 ### How to use it
 
+To use this program you first need to train your model.  
+`python train.py [dataset.csv]`  
+
+Then to use your model.  
+`python predict.py [km]`
+
 ### Matplotlib
+
+This library is used to create the graphic ressources that you see when you **execute the train.py** file.  
 
 ## Resources
 
