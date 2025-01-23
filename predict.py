@@ -1,20 +1,15 @@
-import matplotlib.pyplot as pp
 import os, sys
 from tools import Analyzer, CSVManager
 
 data_file = "train.csv"
 
-def linear_function(a: float, x: float, b: float):
-    return a * x + b
-
 def runner(value: int, thetas: tuple[float, float], x_min_max, y_min_max: tuple[float, float]):
     tool = Analyzer()
     normalized_value = tool.normalize(x_min_max[0], x_min_max[1], value)
-    normalized_result = linear_function(thetas[1], normalized_value, thetas[0])
+    normalized_result = tool.linear_function(thetas[1], normalized_value, thetas[0])
     denormalized_result = tool.denormalize(y_min_max[0], y_min_max[1], normalized_result)
 
-    print(normalized_result)
-    print(denormalized_result)
+    print(f"Predicted price for {value}km: {denormalized_result:.2f}")
     return
 
 def parser(value: str):
