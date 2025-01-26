@@ -85,7 +85,11 @@ $\alpha$ here is the learning rate which mean how fast we are gonna go down to t
 
 ### Normalization
 
-We normaliza
+We do normalization of the dataset to have better result and be able to handle large data values (gradient descent doesn't like high values).  
+That's why we normalize data between 0 and 1.  
+
+> [!TIP]
+> Normalize data can also reduce computationnal complexity  
 
 ## Pratical
 
