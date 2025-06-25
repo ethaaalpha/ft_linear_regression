@@ -19,6 +19,8 @@ class Analyzer:
 
     def normalize(self, y_min, y_max, y):
         """Normalization of the value between [0, 1]"""
+        if y_max - y_min == 0:
+            return 0
         return (y - y_min) / (y_max - y_min)
 
     def denormalize(self, y_min, y_max, y):
