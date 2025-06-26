@@ -33,12 +33,13 @@ def parser(value: str):
 def main():
     args = sys.argv
 
-    if (len(args) != 2):
-        print("python predict.py [value]", file=sys.stderr)
+    if (len(args) != 1):
+        print("use: python predict.py", file=sys.stderr)
         return 2
     else:
         if (os.path.exists(data_file) and os.access(data_file, os.R_OK)):
-            parser(args[1])
+            print("Please enter a specific mileage in KM: ", end="")
+            parser(input())
         else:
             print("The train.csv file do not exist or is not readable!")
             return 2
