@@ -15,7 +15,7 @@ def runner(value: int, thetas: tuple[float, float], x_min_max, y_min_max: tuple[
 def parser(value: str):
     csv = CSVManager()
 
-    if not value.isalnum() or int(value) < 0:
+    if not value.isnumeric() or int(value) < 0:
         print("Invalid value passed must be a positive number!")
         return
 
